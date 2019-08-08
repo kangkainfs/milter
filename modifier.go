@@ -62,8 +62,8 @@ func (m *Modifier) ChangeHeader(index int, name, value string) error {
 	return m.writePacket(NewResponse('m', buffer.Bytes()).Response())
 }
 
-// newModifier creates a new Modifier instance from milterSession
-func newModifier(s *milterSession) *Modifier {
+// newModifier creates a new Modifier instance from M
+func newModifier(s *MilterSession) *Modifier {
 	return &Modifier{
 		Macros:      s.macros,
 		Headers:     s.headers,
