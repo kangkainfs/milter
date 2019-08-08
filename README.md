@@ -8,6 +8,9 @@ For example how to use the library see https://github.com/phalaaxx/pf-milters - 
 
 I changed the original package for better usage. 
 
+- Better Integrating Interface
+- Callback Interfaces with Context
+
 ````golang
 
 import "github.com/x-mod/milter"
@@ -41,12 +44,18 @@ func Main(cmd *cobra.Command, args []string) error {
 }
 
 func Handler(ctx context.Context, conn net.Conn) error {
-	ssn := milter.NewMilterSession(conn, milter.WithMilter(&MyMilter{}), milter.WithContext(ctx))
+    ssn := milter.NewMilterSession(conn, 
+            milter.WithMilter(&MyMilter{}), 
+            milter.WithContext(ctx))
 	return ssn.Serve()
 }
 
 //MyMilter implement the Milter interface
 type MyMilter struct{}
 
-///TODO
+///Callback with Context
+
+// Connect(ctx context.Context, host string, family string, port uint16, addr net.IP, m *Modifier) (Response, error)
+
+// Helo(ctx context.Context, name string, m *Modifier) (Response, error)
 ````
